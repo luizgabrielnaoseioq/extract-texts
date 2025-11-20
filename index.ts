@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as  path from 'path';
+import * as readline from 'readline'
 
 function readDirectory(pathForRead: string) {
   const IGNORE_FOLDERS = ['node_modules', '.git', 'dist', 'build']
@@ -9,11 +10,21 @@ function readDirectory(pathForRead: string) {
     for (const element of files) {
       const fullPath = path.join(pathForRead, element)
       const stats = fs.statSync(fullPath)
+
       if (stats.isFile()) {
+
         const ext = path.extname(fullPath)
+
         if (ext === '.tsx' || ext === '.jsx') {
           list.push(fullPath)
+
+          const data = fs.readFileSync(fullPath, 'utf-8')
+          const lines = data.split('\n')
+          lines.forEach(line => {
+            console.log("line: ", line);
+          })
         }
+
       } else if (stats.isDirectory()) {
         const folderName = path.basename(fullPath)
         if (IGNORE_FOLDERS.includes(folderName)) {
@@ -30,7 +41,7 @@ function readDirectory(pathForRead: string) {
   }
 }
 
-const pathToRead = '../../frontend-bpf'
+const pathToRead = '../login-api/'
 
 console.log(
   readDirectory(pathToRead)
