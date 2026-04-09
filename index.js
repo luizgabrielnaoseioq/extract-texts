@@ -1,4 +1,3 @@
-import { log } from "console";
 import * as fs from "fs";
 import * as path from "path";
 import * as readline from 'readline/promises'
@@ -24,9 +23,22 @@ function scanDir(dir) {
     if (!ext || !validExtensions.includes(ext)) {
       continue
     }
-    console.log(ext)
+    const line = readLine(fullPath)
+    console.log(line)
   }
   rl.close()
+}
+
+function readLine(file) {
+  try {
+    const data = fs.readFileSync(file, 'utf8')
+    const linhas = data.split(/\r?\n/)
+    linhas.forEach(() => {
+      console.log(`Linha ${index + 1}: ${linha}`)
+    })
+  } catch (error) {
+    console.log("Erro ao ler arquivo: ", error)
+  }
 }
 
 console.log(scanDir(projectRoute))

@@ -11,5 +11,8 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.16.1",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "tsx": "^4.21.0"
+  }
 }
