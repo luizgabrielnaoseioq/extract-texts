@@ -1,1 +1,8 @@
-node_modules
+target/
+.idea/
+.vscode/
+*.iml
+*.log
+texts-output/
+node_modules/
+.tmp/
